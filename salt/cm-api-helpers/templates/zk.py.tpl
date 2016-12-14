@@ -1,19 +1,13 @@
 from cm_api.api_client import ApiResource
 
 
-def connect_cm(cm_api, cm_username, cm_password):
-    api = ApiResource(cm_api, username=cm_username, password=cm_password)
+def connect_cm():
+    api = ApiResource('{{ cm_host }}', username='{{ cm_user }}', password='{{ cm_pass }}')
     return api
 
 def zookeeper_quorum():
     """ Return list of ZK quorum """
-    user_name = __salt__['pillar.get']('admin_login:user')
-    password = __salt__['pillar.get']('admin_login:password')
-    cm_ip = __salt__['pnda.cloudera_manager_ip']()
-    api = connect_cm(
-        cm_ip,
-        user_name,
-        password)
+    api = connect_cm()
     cluster_name = api.get_all_clusters()[0].name
     cluster = api.get_cluster(cluster_name)
     zk_quorum = []
@@ -24,4 +18,8 @@ def zookeeper_quorum():
                     zk_quorum.append('%s' % api.get_host(role.hostRef.hostId).ipAddress + ':2181')
     return ",".join(zk_quorum)
 
+def main():
+    print zookeeper_quorum()
 
+if __name__ == "__main__":
+    main()

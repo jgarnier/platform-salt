@@ -1,13 +1,12 @@
-{% set zk_servers = salt['zk.zookeeper_quorum']() %}
+{% set pnda_dir = pillar['pnda']['homedir'] %}
 
 include:
   - opentsdb
+  - cm-api-helpers
 
 pnda_opentsdb-pnda-opentsdb-configuration:
-  file.replace:
-    - name: /etc/opentsdb/opentsdb.conf
-    - pattern: '.*tsd.storage.hbase.zk_quorum =.*'
-    - repl: 'tsd.storage.hbase.zk_quorum = {{ zk_servers }}'
+  cmd.run:
+    - name: sed -i "s/.*tsd.storage.hbase.zk_quorum =.*/tsd.storage.hbase.zk_quorum = $(python {{ pnda_dir }}/cm-api-helpers/zk.py)/g" /etc/opentsdb/opentsdb.conf   
 
 pnda_opentsdb-pnda-opentsdb-configuration-lastvalue:
   file.replace:
