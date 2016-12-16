@@ -24,7 +24,8 @@ console-backend-dl-and-extract:
     - source: {{ packages_server }}/{{ backend_app_package }}
     - source_hash: {{ packages_server }}/{{ backend_app_package }}.sha512.txt
     - archive_format: tar
-    - tar_options: v
+    - options: zxf
+    - list_options: gzip --decompress --stdout
     - if_missing: {{ install_dir }}/console-backend-data-logger-{{ backend_app_version }}
 
 console-backend-symlink_data_logger_dir:

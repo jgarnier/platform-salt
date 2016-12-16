@@ -22,7 +22,8 @@ logserver-dl-and-extract:
     - source: https://download.elastic.co/logstash/logstash/logstash-1.5.4.tar.gz
     - source_hash: https://download.elastic.co/logstash/logstash/logstash-1.5.4.tar.gz.sha1.txt
     - archive_format: tar
-    - tar_options: v
+    - options: zxf
+    - list_options: gzip --decompress --stdout
     - if_missing: {{ install_dir }}/logstash-1.5.4
 
 logserver-link_release:

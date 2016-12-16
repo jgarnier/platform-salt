@@ -43,7 +43,8 @@ console-frontend-dl-and-extract:
     - source: {{ packages_server }}/{{ console_frontend_package }}
     - source_hash: {{ packages_server }}/{{ console_frontend_package }}.sha512.txt
     - archive_format: tar
-    - tar_options: v
+    - options: zxf
+    - list_options: gzip --decompress --stdout
     - if_missing: {{ console_dir }}-{{ console_frontend_version }}
 
 console-frontend-create_directory_link:

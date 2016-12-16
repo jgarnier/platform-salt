@@ -28,6 +28,8 @@ kibana-dl_and_extract_kibana:
     - source: https://download.elastic.co/kibana/kibana/kibana-{{ kibana_version }}.tar.gz
     - source_hash: https://download.elastic.co/kibana/kibana/kibana-{{ kibana_version }}.tar.gz.sha1.txt
     - archive_format: tar
+    - options: zxf
+    - list_options: gzip --decompress --stdout
     - if_missing: {{kibana_directory}}/kibana-{{kibana_version }}
 
 kibana-copy_configuration_kibana:

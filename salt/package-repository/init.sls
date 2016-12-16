@@ -14,7 +14,8 @@ package-repository-dl-and-extract:
     - source: {{ packages_server }}/{{ package_repository_package }}
     - source_hash: {{ packages_server }}/{{ package_repository_package }}.sha512.txt
     - archive_format: tar
-    - tar_options: v
+    - options: zxf
+    - list_options: gzip --decompress --stdout
     - if_missing: {{ install_dir }}/{{ package_repository_directory_name }} 
 
 package-repository-install_python_deps:

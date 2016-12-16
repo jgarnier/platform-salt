@@ -23,7 +23,8 @@ platform-testing-cdh-dl-and-extract:
     - source: {{ packages_server }}/{{platform_testing_package}}-{{ platform_testing_version }}.tar.gz
     - source_hash: {{ packages_server }}/{{platform_testing_package}}-{{ platform_testing_version }}.tar.gz.sha512.txt
     - archive_format: tar
-    - tar_options: v
+    - options: zxf
+    - list_options: gzip --decompress --stdout
     - if_missing: {{ platform_testing_directory }}/{{platform_testing_package}}-{{ platform_testing_version }}
 
 platform-testing-cdh-install_dev_deps:

@@ -1,4 +1,4 @@
-{{ env }}:
+{{ saltenv }}:
 
   '*':
     - tasks.system_update
