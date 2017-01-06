@@ -4,6 +4,7 @@
 {% set package_repository_package = 'package-repository-' + package_repository_version + '.tar.gz' %}
 {% set install_dir = pillar['pnda']['homedir'] %}
 {% set package_repository_fs_type = salt['pillar.get']('package_repository:fs_type', '') %}
+{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', '') %}
 
 {% set virtual_env_dir = install_dir + "/" + package_repository_directory_name + "/venv" %}
 
@@ -25,6 +26,9 @@ package-repository-create-venv:
     - requirements: {{ install_dir }}/{{ package_repository_directory_name }}/requirements.txt
     - python: python2
     - reload_modules: True
+{% if pip_extra_index_url != '' %}
+    - extra_index_url: {{ pip_extra_index_url }}
+{% endif %}
     - require:
       - pip: python-pip-install_python_pip
       - archive: package-repository-dl-and-extract
