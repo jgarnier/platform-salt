@@ -18,14 +18,21 @@ elasticsearch:
   confdir: /etc/elasticsearch
   workdir: /tmp/elasticsearch
 
-jupyter:
-  version: 4.2.0
-  confdir: /usr/local/etc/jupyter
-  kerneldir: /usr/local/share/jupyter/kernels
+elasticsearch-cluster:
+  version: 5.0.0
+  name: pnda-cluster
+  directory: /opt/pnda
+  logdir: /var/log/elasticsearch
+  datadir: /var/lib/elasticsearch
+  workdir: /tmp/elasticsearch
 
-jupyterhub:
-  version: 0.6.1
-  confdir: /etc/jupyterhub
+logstash-cluster:
+  version: 5.0.2
+  directory: /opt/pnda
+  logdir: /var/log/logstash
+  confdir: /etc/logstash
+  datadir: /var/lib/logstash
+  inputdir: /tmp/logstash
 
 zookeeper:
   version: 3.4.6
