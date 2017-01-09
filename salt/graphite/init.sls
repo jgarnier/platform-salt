@@ -1,5 +1,6 @@
 # based on http://graphite-api.readthedocs.io/en/latest/deployment.html#nginx-uwsgi
 {% set virtual_env_dir = '/opt/pnda/graphite-api' %}
+{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', '') %}
 
 include:
   - python-pip
@@ -21,6 +22,9 @@ graphite-create-virtualenv:
   virtualenv.managed:
     - name: {{ virtual_env_dir }}
     - requirements: salt://graphite/files/requirements.txt
+{% if pip_extra_index_url != '' %}
+    - extra_index_url: {{ pip_extra_index_url }}
+{% endif %}
     - require:
       - pip: python-pip-install_python_pip
 
