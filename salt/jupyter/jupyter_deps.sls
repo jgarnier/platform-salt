@@ -1,7 +1,8 @@
-{% set npm_registry = salt['pillar.get']('npm:registry', 'https://registry.npmjs.org/') %}
+{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', '') %}
+
 jupyter-install_anaconda_deps:
   cmd.run:
-    - name: export PATH=/opt/cloudera/parcels/Anaconda/bin:$PATH; npm set registry {{ npm_registry}} && pip install cm_api avro
+    - name: export PATH=/opt/cloudera/parcels/Anaconda/bin:$PATH; pip install {% if pip_extra_index_url != '' -%}--extra-index-url {{ pip_extra_index_url }}{% endif %} cm_api avro
 
 jupyter-install_anaconda_ipywidgets:
   cmd.run:
