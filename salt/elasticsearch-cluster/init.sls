@@ -7,7 +7,7 @@
 {% set elasticsearch_workdir = salt['pillar.get']('elasticsearch-cluster:workdir', '') %}
 {% set elasticsearch_pluginsdir =  elasticsearch_directory + '/elasticsearch-' + elasticsearch_version + '/plugins' %}
 {% set elasticsearch_confdir = elasticsearch_directory + '/elasticsearch-' + elasticsearch_version + '/config' %}
-{% set extra_mirror = salt['pillar.get']('extra:mirror', 'https://artifacts.elastic.co/downloads/elasticsearch/') %}
+{% set extra_mirror = salt['pillar.get']('extra:mirror', 'https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch/') %}
 {% set elasticsearch_url = extra_mirror +  'elasticsearch-' +  elasticsearch_version + '.tar.gz' %}
 
 {% set minion_roles = salt['grains.get']('roles', []) %}
