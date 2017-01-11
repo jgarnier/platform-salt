@@ -2,6 +2,8 @@
 
 {% set pnda_home_directory = pillar['pnda']['homedir'] %}
 {% set virtual_env_dir = pnda_home_directory + '/jupyter' %}
+{% set extra_mirror = salt['pillar.get']('extra:mirror', 'https://github.com/klyr/jupyter-spark/releases/download/0.3.0-patch/') %}
+{% set jupyter_ext_url = extra_mirror +  'jupyter-spark-0.3.0-patch.tar.gz' %}
 
 jupyter-extension-enable_widget_nbextensions:
   cmd.run:
@@ -13,7 +15,7 @@ jupyter-extension-enable_widget_nbextensions:
 jupyter-extension_install_jupyter_spark:
   pip.installed:
     - pkgs:
-      - https://github.com/klyr/jupyter-spark/releases/download/0.3.0-patch/jupyter-spark-0.3.0-patch.tar.gz
+      - {{ jupyter_ext_url }}
       - lxml==3.6.4
     - bin_env: {{ virtual_env_dir }}
 
