@@ -4,7 +4,7 @@
 {% set elasticsearch_logdir = salt['pillar.get']('elasticsearch:logdir', '') %}
 {% set elasticsearch_confdir = salt['pillar.get']('elasticsearch:confdir', '') %}
 {% set elasticsearch_workdir = salt['pillar.get']('elasticsearch:workdir', '') %}
-{% set extra_mirror = salt['pillar.get']('extra:mirror', 'https://artifacts.elastic.co/downloads/elasticsearch/') %}
+{% set extra_mirror = salt['pillar.get']('extra:mirror', 'https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch/') %}
 {% set elasticsearch_url = extra_mirror +  'elasticsearch-' +  elasticsearch_version + '.tar.gz' %}
 
 elasticsearch-elasticsearch:
