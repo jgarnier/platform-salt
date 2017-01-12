@@ -86,7 +86,7 @@ console-backend-install_utils_dependencies:
     - cwd: {{ install_dir }}/console-backend-utils
     - name: npm config set registry {{ npm_registry }} && npm install --json
     - require:
-      - npm: nodejs-update_npm
+      - npm: nodejs-install_useful_packages
 
 # Install npm dependencies
 console-backend-install_backend_app_dependencies:
@@ -94,7 +94,7 @@ console-backend-install_backend_app_dependencies:
     - cwd: {{ app_dir }}
     - name: npm config set registry {{ npm_registry }} && npm install --json
     - require:
-      - npm: nodejs-update_npm
+      - npm: nodejs-install_useful_packages
 
 {% if grains['os'] == 'Ubuntu' %}
 # Create upstart script from template

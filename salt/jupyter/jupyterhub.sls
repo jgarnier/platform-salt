@@ -33,7 +33,7 @@ jupyterhub-install_configurable_http_proxy:
   npm.installed:
     - name: configurable-http-proxy
     - require:
-      - npm: nodejs-update_npm
+      - npm: nodejs-install_useful_packages
 
 # set up upstart script
 jupyterhub-copy_upstart:
