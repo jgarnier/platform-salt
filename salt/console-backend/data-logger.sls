@@ -54,7 +54,7 @@ console-backend-install_data_logger_utils_dependencies:
     - cwd: {{ install_dir }}/console-backend-utils
     - name: npm config set registry {{ npm_registry }} && npm install --json
     - require:
-      - npm: nodejs-update_npm
+      - npm: nodejs-install_useful_packages
 
 # Install npm dependencies
 console-backend-install_backend_data_logger_app_dependencies:
@@ -62,7 +62,7 @@ console-backend-install_backend_data_logger_app_dependencies:
     - cwd: {{ app_dir }}
     - name: npm config set registry {{ npm_registry }} && npm install --json
     - require:
-      - npm: nodejs-update_npm
+      - npm: nodejs-install_useful_packages
 
 # Create upstart script from template
 console-backend-copy_data_logger_upstart:
