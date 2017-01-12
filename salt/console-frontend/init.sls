@@ -62,7 +62,7 @@ console-frontend-install_app_dependencies:
     - cwd: {{ console_dir }}
     - name: npm config set registry {{ npm_registry }} && npm install --json
     - require:
-      - npm: nodejs-install_useful_packages
+      - pkg: nodejs-install_useful_packages
 
 # Create the config directory if it doesn't exist
 console-frontend-create_config_directory:
