@@ -1,6 +1,7 @@
 {% set extra_mirror = salt['pillar.get']('extra:mirror', 'https://deb.nodesource.com/') %}
 {% set nodejs_setup_url = extra_mirror +  'setup_6.x' %}
 
+{% if extra_mirror != '' %}
 # Specify version 6 of nodejs, latest LTS
 nodejs-v6-setup:
   cmd.run:
