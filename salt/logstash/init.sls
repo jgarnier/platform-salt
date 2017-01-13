@@ -59,7 +59,7 @@ logstash-dl_and_extract_logstash:
   archive.extracted:
     - name: {{logstash_directory}}
     - source: {{logstash_url}
-    - source_hash: {{logstash_url}https://artifacts.elastic.co/downloads/logstash/logstash-{{ logstash_version }}.sha1
+    - source_hash: {{logstash_url}.sha1
     - archive_format: tar
     - tar_options: v
     - if_missing: {{logstash_directory}}/logstash-{{ logstash_version }}
