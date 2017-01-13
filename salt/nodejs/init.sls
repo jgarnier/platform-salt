@@ -1,5 +1,4 @@
-{% set extra_mirror = salt['pillar.get']('extra:mirror', 'https://deb.nodesource.com/') %}
-{% set nodejs_setup_url = extra_mirror +  'setup_6.x' %}
+{% set extra_mirror = salt['pillar.get']('extra:mirror', '') %}
 
 {% if extra_mirror != '' %}
 # Specify version 6 of nodejs, latest LTS
@@ -16,6 +15,7 @@ nodejs-install_useful_packages:
   pkg.installed:
     - pkgs:
       - nodejs
+ {% if extra_mirror != '' %}
     - require:
       - cmd: nodejs-v6-setup
-
+{% endif %}
