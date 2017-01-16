@@ -18,12 +18,12 @@ filegen clockstats file clockstats type day enable
 # more information.
 
 # Use Ubuntu's ntp server as a fallback.
-server ntp.ubuntu.com
 {% if ntp_servers is not none and ntp_servers|length > 0 %}   
 {% for ntp_server in ntp_servers %}
 server {{ ntp_server }}
 {% endfor %}
 {% else %}
+server ntp.ubuntu.com
 server 0.ubuntu.pool.ntp.org
 server 1.ubuntu.pool.ntp.org
 server 2.ubuntu.pool.ntp.org
