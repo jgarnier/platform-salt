@@ -8,7 +8,7 @@ install_python_deps:
     - pkgs:
       - cm_api == 11.0.0
 {% if pip_extra_index_url != '' %}
-      - extra_index_url: {{ pip_extra_index_url }}
+    - extra_index_url: {{ pip_extra_index_url }}
 {% endif %}
     - reload_modules: True
     - require:
