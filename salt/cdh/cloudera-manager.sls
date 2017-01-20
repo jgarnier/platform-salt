@@ -6,6 +6,7 @@
 {%- set cmdb_user = salt['pillar.get']('cloudera:cmdb:user', 'scm') -%}
 {%- set cmdb_database = salt['pillar.get']('cloudera:cmdb:database', 'scm') -%}
 {%- set cmdb_password = salt['pillar.get']('cloudera:cmdb:password', 'scm') -%}
+{%- set cm_mirror = salt['pillar.get']('cloudera:cm_mirror', 'https://archive.cloudera.com/cm5/ubuntu/trusty/amd64/cm') -%}
 
 include:
   - java
@@ -14,9 +15,9 @@ include:
 cloudera-manager-add_cloudera_manager_repository:
   pkgrepo.managed:
     - humanname: Cloudera Manager
-    - name: deb [arch=amd64] https://archive.cloudera.com/cm5/ubuntu/trusty/amd64/cm trusty-cm{{cm_ver}} contrib
+    - name: deb [arch=amd64] {{ cm_mirror }} trusty-cm{{cm_ver}} contrib
     - dist: trusty-cm{{cm_ver}}
-    - key_url: https://archive.cloudera.com/cm5/ubuntu/trusty/amd64/cm/archive.key
+    - key_url: {{ cm_mirror }}archive.key
     - refresh: True
     - file: /etc/apt/sources.list.d/cloudera.list
 
