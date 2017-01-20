@@ -2,8 +2,10 @@
 {% set grafana_version = settings.get('version', '3.1.1-1470047149') %}
 {% set grafana_hash = settings.get('release_hash', 'sha256=4d3153966afed9b874a6fa6182914d9bd2e69698bbc7c13248d1b7ef09d3d328') %}
 
+{% set extra_mirror = salt['pillar.get']('extra:mirror', 'https://grafanarel.s3.amazonaws.com/builds/') %}
+
 {% set grafana_deb_package = 'grafana_' + grafana_version + '_amd64.deb' %}
-{% set grafana_deb_location = 'https://grafanarel.s3.amazonaws.com/builds/' + grafana_deb_package %}
+{% set grafana_deb_location = extra_mirror + grafana_deb_package %}
 
 {% set pnda_graphite_port = 8013 %}
 {% set pnda_graphite_host = salt['pnda.ip_addresses']('graphite')[0] %}
