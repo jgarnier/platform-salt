@@ -19,7 +19,7 @@ cloudera-manager-add_cloudera_manager_repository:
     - humanname: Cloudera Manager
     - name: deb [arch=amd64] {{ cm_mirror }} trusty-cm{{cm_ver}} contrib
     - dist: trusty-cm{{cm_ver}}
-    - key_url: {{ cm_mirror }}archive.key
+    - key_url: {{ cm_mirror }}/archive.key
     - refresh: True
     - file: /etc/apt/sources.list.d/cloudera.list
 {% elif grains['os'] == 'RedHat' %}
