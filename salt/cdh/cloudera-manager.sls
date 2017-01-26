@@ -28,7 +28,7 @@ cloudera-manager-add_cloudera_manager_repository:
     - gpgkey: https://archive.cloudera.com/cm5/redhat/7/x86_64/cm/RPM-GPG-KEY-cloudera
 {% endif %}
 
-cloudera-manager-install_cloudera_manager:
+cloudera-manager-install_cloud  era_manager:
   pkg.installed:
     - pkgs:
       - cloudera-manager-daemons
