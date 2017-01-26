@@ -1,6 +1,6 @@
 {% set flavor_cfg = pillar['pnda_flavor']['states'][sls] %}
 {% set virtual_env_dir = pillar['pnda']['homedir'] + "/elasticsearch-curator" %}
-{% set pip_index_url = salt['pillar.get']('pip:index_url', '') %}
+{% set pip_index_url = salt['pillar.get']('pip:index_url', 'https://pypi.python.org/simple/') %}
 
 include:
   - python-pip
@@ -10,9 +10,7 @@ curator-python-elasticsearch-curator:
     - name: {{ virtual_env_dir }}
     - requirements: salt://curator/files/requirements.txt
     - python: python2
-{% if pip_index_url != '' %}
     - index_url: {{ pip_index_url }}
-{% endif %}
     - require:
       - pip: python-pip-install_python_pip
 
