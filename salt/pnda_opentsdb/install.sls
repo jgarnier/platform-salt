@@ -1,4 +1,4 @@
-{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', '') %}
+{% set pip_index_url = salt['pillar.get']('pip:index_url', '') %}
 
 include:
   - python-pip
@@ -7,8 +7,8 @@ install_python_deps:
   pip.installed:
     - pkgs:
       - cm_api == 11.0.0
-{% if pip_extra_index_url != '' %}
-    - extra_index_url: {{ pip_extra_index_url }}
+{% if pip_index_url != '' %}
+    - index_url: {{ pip_index_url }}
 {% endif %}
     - reload_modules: True
     - require:
