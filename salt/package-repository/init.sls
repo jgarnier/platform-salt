@@ -41,7 +41,7 @@ package-repository-pbr:
 
 package-repository-install-requirements:
   pip.installed:
-    - name: {{ virtual_env_dir }}
+    - bin_env: {{ virtual_env_dir }}
     - requirements: {{ install_dir }}/{{ package_repository_directory_name }}/requirements.txt
     - index_url: {{ pip_index_url }}
     - require:
