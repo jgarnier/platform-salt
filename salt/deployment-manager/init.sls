@@ -3,7 +3,7 @@
 {% set deployment_manager_directory_name = 'deployment-manager-' + deployment_manager_version %}
 {% set deployment_manager_package = 'deployment-manager-' + deployment_manager_version + '.tar.gz' %}
 {% set install_dir = pillar['pnda']['homedir'] %}
-{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', '') %}
+{% set pip_index_url = salt['pillar.get']('pip:index_url', '') %}
 
 {% set virtual_env_dir = install_dir + "/" + deployment_manager_directory_name + "/venv" %}
 
@@ -37,8 +37,8 @@ deployment-manager-create-venv:
     - requirements: {{ install_dir }}/{{ deployment_manager_directory_name }}/requirements.txt
     - python: python2
     - reload_modules: True
-{% if pip_extra_index_url != '' %}
-    - extra_index_url: {{ pip_extra_index_url }}
+{% if pip_index_url != '' %}
+    - index_url: {{ pip_index_url }}
 {% endif %}
     - require:
       - archive: deployment-manager-dl-and-extract

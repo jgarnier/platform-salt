@@ -13,7 +13,7 @@
 {% set install_dir = pillar['pnda']['homedir'] %}
 
 {% set virtual_env_dir = install_dir + "/" + app_directory_name + "/venv" %}
-{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', '') %}
+{% set pip_index_url = salt['pillar.get']('pip:index_url', '') %}
 
 include:
   - python-pip
@@ -32,8 +32,8 @@ hdfs-cleaner-create-venv:
     - name: {{ virtual_env_dir }}
     - requirements: salt://hdfs-cleaner/files/requirements.txt
     - python: python2
-{% if pip_extra_index_url != '' %}
-    - extra_index_url: {{ pip_extra_index_url }}
+{% if pip_index_url != '' %}
+    - index_url: {{ pip_index_url }}
 {% endif %}
     - require:
       - pip: python-pip-install_python_pip

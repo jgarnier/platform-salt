@@ -1,6 +1,6 @@
 {% set pnda_home_directory = pillar['pnda']['homedir'] %}
 {% set virtual_env_dir = pnda_home_directory + '/jupyter' %}
-{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', '') %}
+{% set pip_index_url = salt['pillar.get']('pip:index_url', '') %}
 {% set npm_registry = salt['pillar.get']('npm:registry', 'https://registry.npmjs.org/') %}
 
 {% set jupyterhub_config_dir = '/etc/jupyterhub' %}
@@ -12,8 +12,8 @@ jupyterhub-install:
   pip.installed:
     - requirements: salt://jupyter/files/requirements-jupyterhub.txt
     - bin_env: {{ virtual_env_dir }}
-{% if pip_extra_index_url != '' %}
-    - extra_index_url: {{ pip_extra_index_url }}
+{% if pip_index_url != '' %}
+    - index_url: {{ pip_index_url }}
 {% endif %}
     - require:
       - virtualenv: jupyter-create-venv

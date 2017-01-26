@@ -5,7 +5,7 @@
 {% set platform_testing_package = 'platform-testing-general' %}
 
 {% set virtual_env_dir = platform_testing_directory + "/" + platform_testing_package + "-" + platform_testing_version + "/venv" %}
-{% set pip_extra_index_url = salt['pillar.get']('pip:extra_index_url', '') %}
+{% set pip_index_url = salt['pillar.get']('pip:index_url', '') %}
 
 {% set kafka_jmx_port = '9050' %}
 {% set console_port = '3001' %}
@@ -67,8 +67,8 @@ platform-testing-general-create-venv:
     - name: {{ virtual_env_dir }}
     - requirements: {{ platform_testing_directory }}/{{platform_testing_package}}-{{ platform_testing_version }}/requirements.txt
     - python: python2
-{% if pip_extra_index_url != '' %}
-    - extra_index_url: {{ pip_extra_index_url }}
+{% if pip_index_url != '' %}
+    - index_url: {{ pip_index_url }}
 {% endif %}
     - require:
       - pip: python-pip-install_python_pip
@@ -83,8 +83,8 @@ platform-testing-general-install-requirements-kafka:
   pip.installed:
     - bin_env: {{ virtual_env_dir }}
     - requirements: {{ platform_testing_directory }}/{{platform_testing_package}}-{{ platform_testing_version }}/plugins/kafka/requirements.txt
-{% if pip_extra_index_url != '' %}
-    - extra_index_url: {{ pip_extra_index_url }}
+{% if pip_index_url != '' %}
+    - index_url: {{ pip_index_url }}
 {% endif %}
     - require:
       - virtualenv: platform-testing-general-create-venv
@@ -121,8 +121,8 @@ platform-testing-general-install-requirements-zookeeper:
   pip.installed:
     - bin_env: {{ virtual_env_dir }}
     - requirements: {{ platform_testing_directory }}/{{platform_testing_package}}-{{ platform_testing_version }}/plugins/zookeeper/requirements.txt
-{% if pip_extra_index_url != '' %}
-    - extra_index_url: {{ pip_extra_index_url }}
+{% if pip_index_url != '' %}
+    - index_url: {{ pip_index_url }}
 {% endif %}
     - require:
       - virtualenv: platform-testing-general-create-venv
@@ -159,8 +159,8 @@ platform-testing-general-install-requirements-dm-blackbox:
   pip.installed:
     - bin_env: {{ virtual_env_dir }}
     - requirements: {{ platform_testing_directory }}/{{platform_testing_package}}-{{ platform_testing_version }}/plugins/dm_blackbox/requirements.txt
-{% if pip_extra_index_url != '' %}
-    - extra_index_url: {{ pip_extra_index_url }}
+{% if pip_index_url != '' %}
+    - index_url: {{ pip_index_url }}
 {% endif %}
     - require:
       - virtualenv: platform-testing-general-create-venv
