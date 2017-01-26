@@ -5,7 +5,7 @@
 {% set platform_testing_package = 'platform-testing-cdh' %}
 
 {% set virtual_env_dir = platform_testing_directory + "/" + platform_testing_package + "-" + platform_testing_version + "/venv" %}
-{% set pip_index_url = salt['pillar.get']('pip:index_url', '') %}
+{% set pip_index_url = salt['pillar.get']('pip:index_url', 'https://pypi.python.org/simple/') %}
 
 {% set console_port = '3001' %}
 {% set cm_port = '7180' %}
@@ -37,9 +37,7 @@ platform-testing-cdh-create-venv:
   virtualenv.managed:
     - name: {{ virtual_env_dir }}
     - requirements: {{ platform_testing_directory }}/{{ platform_testing_package }}-{{ platform_testing_version }}/requirements.txt
-{% if pip_index_url != '' %}
     - index_url: {{ pip_index_url }}
-{% endif %}
     - require:
       - pip: python-pip-install_python_pip
       - archive: platform-testing-cdh-dl-and-extract
@@ -54,9 +52,7 @@ platform-testing-cdh-install-requirements-cdh:
   pip.installed:
     - bin_env: {{ virtual_env_dir }}
     - requirements: {{ platform_testing_directory }}/{{platform_testing_package}}-{{ platform_testing_version }}/plugins/cdh/requirements.txt
-{% if pip_index_url != '' %}
     - index_url: {{ pip_index_url }}
-{% endif %}
     - require:
       - virtualenv: platform-testing-cdh-create-venv
 
@@ -88,9 +84,7 @@ platform-testing-cdh-install-requirements-cdh_blackbox:
   pip.installed:
     - bin_env: {{ virtual_env_dir }}
     - requirements: {{ platform_testing_directory }}/{{platform_testing_package}}-{{ platform_testing_version }}/plugins/cdh_blackbox/requirements.txt
-{% if pip_index_url != '' %}
     - index_url: {{ pip_index_url }}
-{% endif %}
     - require:
       - virtualenv: platform-testing-cdh-create-venv
 
