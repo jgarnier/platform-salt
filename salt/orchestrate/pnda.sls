@@ -7,6 +7,13 @@ cdh-run_cloudera_user:
     - sls: cdh.cloudera_user
     - timeout: 120
 
+cdh-set_cloudera_mirror:
+  salt.state:
+    - tgt: 'G@pnda_cluster:{{pnda_cluster}} and G@cloudera:*'
+    - tgt_type: compound
+    - sls: cdh.cloudera_mirror
+    - timeout: 120
+
 cdh-install_hadoop:
   salt.state:
     - tgt: 'G@pnda_cluster:{{pnda_cluster}} and G@roles:cloudera_manager'
