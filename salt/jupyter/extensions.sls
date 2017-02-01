@@ -12,6 +12,12 @@ jupyter-extension-enable_widget_nbextensions:
     - unless: |
         {{ virtual_env_dir }}/bin/jupyter nbextension list --system|grep 'jupyter-spark/extension.*enabled'
 
+jupyter-extension_install_jupyter_spark_requirements:
+  pip.installed:
+    - index_url: {{ pip_index_url }}  
+    - requirements: salt://jupyter/files/requirements-jupyter-spark-patch.txt
+    - bin_env: {{ virtual_env_dir }}
+
 # lxml improves perforance on server side communication to Spark
 jupyter-extension_install_jupyter_spark:
   pip.installed:
@@ -20,6 +26,8 @@ jupyter-extension_install_jupyter_spark:
       - lxml==3.6.4
     - index_url: {{ pip_index_url }}
     - bin_env: {{ virtual_env_dir }}
+    - require:
+      - pip: jupyter-extension_install_jupyter_spark_requirements
 
 jupyter-extension_jupyter_spark:
   cmd.run:
