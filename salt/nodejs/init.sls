@@ -9,13 +9,14 @@ nodejs-v6-setup:
 {% elif grains['os'] == 'RedHat' %}
     - name: curl --silent --location https://rpm.nodesource.com/setup_6.x | sudo -E bash -
 {% endif %}
+{% endif %}
 
 # Install nodejs, npm
 nodejs-install_useful_packages:
   pkg.installed:
     - pkgs:
       - nodejs
- {% if extra_mirror == '' %}
+{% if extra_mirror == '' %}
     - require:
       - cmd: nodejs-v6-setup
 {% endif %}
