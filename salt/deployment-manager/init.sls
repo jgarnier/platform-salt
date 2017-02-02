@@ -34,9 +34,24 @@ deployment-manager-dl-and-extract:
 deployment-manager-create-venv:
   virtualenv.managed:
     - name: {{ virtual_env_dir }}
+    - index_url: {{ pip_index_url }}
+    - require:
+      - pip: python-pip-install_python_pip
+      - archive: deployment-manager-dl-and-extract
+
+deployment-manager-pbr:
+  pip.installed:
+    - bin_env: {{ virtual_env_dir }}
+    - name: pbr==1.10
+    - index_url: {{ pip_index_url }}
+    - require:
+      - virtualenv: deployment-manager-create-venv
+
+deployment-manager-install-requirements:
+  pip.installed:
+    - bin_env: {{ virtual_env_dir }}
     - requirements: {{ install_dir }}/{{ deployment_manager_directory_name }}/requirements.txt
     - python: python2
-    - reload_modules: True
     - index_url: {{ pip_index_url }}
     - require:
       - archive: deployment-manager-dl-and-extract
