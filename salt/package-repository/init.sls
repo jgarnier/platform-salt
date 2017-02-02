@@ -23,9 +23,7 @@ package-repository-dl-and-extract:
 package-repository-create-venv:
   virtualenv.managed:
     - name: {{ virtual_env_dir }}
-    - requirements: {{ install_dir }}/{{ package_repository_directory_name }}/requirements.txt
     - python: python2
-    - reload_modules: True
     - index_url: {{ pip_index_url }}
     - require:
       - pip: python-pip-install_python_pip
