@@ -2,7 +2,7 @@
 {% set logstash_version = salt['pillar.get']('logstash:release_version', '1.5.4') %}
 {% set logstash_package = 'logstash-' + logstash_version + '.tar.gz' %}
 {% set install_dir = pillar['pnda']['homedir'] %}
-{% set extra_mirror = salt['pillar.get']('extra:mirror', 'https://artifacts.elastic.co/downloads/logstash/') %}
+{% set extra_mirror = salt['pillar.get']('extra:mirror', 'https://download.elastic.co/logstash/logstash/') %}
 {% set logstash_url = extra_mirror +  'logstash-' +  logstash_version + '.tar.gz' %}
 
 include:
