@@ -43,6 +43,7 @@ install-graphite-api:
     - pkgs:
       - cairocffi == 0.6
       - graphite-api == 1.1.3
+    - index_url: {{ pip_index_url }}
 
 graphite-create-virtualenv:
   virtualenv.managed:
